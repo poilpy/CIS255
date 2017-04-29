@@ -14,7 +14,12 @@ public class Drawing extends JPanel
 	private ArrayList<Point> pointList;
 
 	private boolean paintOn;
-
+	private static JRadioButton greenRadioButton;
+	private static JRadioButton blueRadioButton;
+	private static JRadioButton redRadioButton;
+	private static JRadioButton eraserRadioButton;
+	private static JButton clearButton;
+	private static Color radioButtonCase;
 	public Drawing()
 	{
 		setBackground(Color.WHITE);
@@ -70,6 +75,38 @@ public class Drawing extends JPanel
 			int x = (int) point.getX();
 			int y = (int) point.getY();
 			d.fillOval(x, y, 10, 10);
+			d.setColor(radioButtonCase);
+		}
+	}
+
+	private static class RadioButtonListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
+			if (greenRadioButton.isSelected())
+			{
+				radioButtonCase = Color.GREEN;
+			} else if (blueRadioButton.isSelected())
+			{
+				radioButtonCase = Color.BLUE;
+			} else if (redRadioButton.isSelected())
+			{
+				radioButtonCase = Color.RED;
+			} else if (eraserRadioButton.isSelected())
+			{
+				radioButtonCase = Color.WHITE;
+			} else
+			{
+				radioButtonCase = Color.WHITE;
+			}
+		}
+	}
+
+	private static class ClearButtonListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
+			pointList.clear();
 		}
 	}
 
