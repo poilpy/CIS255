@@ -15,15 +15,14 @@ public class Drawing extends JPanel
 	private static ArrayList<Point> oldPoints;
 
 	private boolean paintOn;
-	
+
 	private static JRadioButton greenRadioButton;
 	private static JRadioButton blueRadioButton;
 	private static JRadioButton redRadioButton;
 	private static JRadioButton eraserRadioButton;
 	private static JButton clearButton;
-	private static Color radioButtonCase = Color.WHITE;
-	
-	
+	private static Color radioButtonCase;
+
 	public Drawing()
 	{
 		setBackground(Color.WHITE);
@@ -82,23 +81,34 @@ public class Drawing extends JPanel
 			d.setColor(radioButtonCase);
 		}
 	}
-	
-	private static class RadioButtonListener implements ActionListener {
-		public void actionPerformed(ActionEvent event) {
-			if(greenRadioButton.isSelected()) {
+
+	private static class RadioButtonListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
+			if (greenRadioButton.isSelected())
+			{
 				radioButtonCase = Color.GREEN;
-			} else if(blueRadioButton.isSelected()) {
+			} else if (blueRadioButton.isSelected())
+			{
 				radioButtonCase = Color.BLUE;
-			} else if(redRadioButton.isSelected()) {
+			} else if (redRadioButton.isSelected())
+			{
 				radioButtonCase = Color.RED;
-			} else if(eraserRadioButton.isSelected()) {
+			} else if (eraserRadioButton.isSelected())
+			{
+				radioButtonCase = Color.WHITE;
+			} else
+			{
 				radioButtonCase = Color.WHITE;
 			}
 		}
 	}
-	
-	private static class ClearButtonListener implements ActionListener {
-		public void actionPerformed(ActionEvent event) {
+
+	private static class ClearButtonListener implements ActionListener
+	{
+		public void actionPerformed(ActionEvent event)
+		{
 			pointList.clear();
 		}
 	}
