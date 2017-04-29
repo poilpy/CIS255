@@ -21,7 +21,7 @@ public class Drawing extends JPanel
 	private static JRadioButton redRadioButton;
 	private static JRadioButton eraserRadioButton;
 	private static JButton clearButton;
-	private static Color radioButtonCase;
+	private static Color radioButtonCase = Color.WHITE;
 	
 	
 	public Drawing()
@@ -92,8 +92,6 @@ public class Drawing extends JPanel
 			} else if(redRadioButton.isSelected()) {
 				radioButtonCase = Color.RED;
 			} else if(eraserRadioButton.isSelected()) {
-				radioButtonCase = Color.WHITE;
-			} else {
 				radioButtonCase = Color.WHITE;
 			}
 		}
