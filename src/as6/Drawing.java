@@ -188,9 +188,9 @@ public class Drawing extends JPanel
 				frame.getContentPane().add(panel);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				JPanel buttons = new JPanel();
-				buttons.add(greenRadioButton);
 				buttons.add(blueRadioButton);
 				buttons.add(redRadioButton);
+				buttons.add(greenRadioButton);
 				buttons.add(eraserRadioButton);
 				buttons.add(clearButton);
 				buttons.add(size10);
