@@ -10,6 +10,9 @@ public class Drawing extends JPanel
 {
 	public static final int WIDTH = 500;
 	public static final int LENGTH = 600;
+	
+	private int xSize;
+	private int ySize;
 
 	private static ArrayList<Point> bluePoints;
 	private static ArrayList<Point> redPoints;
@@ -23,6 +26,8 @@ public class Drawing extends JPanel
 	private static JRadioButton redRadioButton;
 	private static JRadioButton eraserRadioButton;
 	private static JButton clearButton;
+	private static JButton size10;
+	private static JButton size20;
 
 	public Drawing()
 	{
@@ -36,8 +41,12 @@ public class Drawing extends JPanel
 		blueRadioButton = new JRadioButton("Blue");
 		redRadioButton = new JRadioButton("Red");
 		eraserRadioButton = new JRadioButton("Eraser");
-		clearButton = new JButton("Clear");
+		size10 = new JButton("Size10");
+		size20 = new JButton("Size20");
+	    clearButton = new JButton("Clear"); 
 		this.paintOn = false;
+		this.xSize = 10;
+		this.ySize = 10;
 		this.addMouseListener(new MouseAdapter()
 		{
 
@@ -49,6 +58,28 @@ public class Drawing extends JPanel
 
 		});
 
+		size10.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent event)
+			{
+				xSize = 10;
+				ySize = 10;
+				
+				repaint();
+			}
+		});
+		
+		size20.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent event)
+			{
+				xSize = 20;
+				ySize = 20;
+				
+				repaint();
+			}
+		});
+		
 		clearButton.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent event)
@@ -115,7 +146,7 @@ public class Drawing extends JPanel
 		{
 			int x = (int) point.getX();
 			int y = (int) point.getY();
-			d.fillOval(x, y, 10, 10);
+			d.fillOval(x, y, xSize, ySize);
 			d.setColor(Color.BLUE);
 		}
 
@@ -123,7 +154,7 @@ public class Drawing extends JPanel
 		{
 			int x = (int) point.getX();
 			int y = (int) point.getY();
-			d.fillOval(x, y, 10, 10);
+			d.fillOval(x, y, xSize, ySize);
 			d.setColor(Color.RED);
 		}
 
@@ -131,7 +162,7 @@ public class Drawing extends JPanel
 		{
 			int x = (int) point.getX();
 			int y = (int) point.getY();
-			d.fillOval(x, y, 10, 10);
+			d.fillOval(x, y, xSize, ySize);
 			d.setColor(Color.GREEN);
 		}
 
@@ -139,23 +170,10 @@ public class Drawing extends JPanel
 		{
 			int x = (int) point.getX();
 			int y = (int) point.getY();
-			d.fillOval(x, y, 10, 10);
+			d.fillOval(x, y, xSize, ySize);
 			d.setColor(Color.WHITE);
 		}
 
-	}
-
-	private static class ClearButtonListener implements ActionListener
-	{
-		public void actionPerformed(ActionEvent event)
-		{
-			// greenPoints = new ArrayList<Point>();
-			// bluePoints = new ArrayList<Point>();
-			// redPoints = new ArrayList<Point>();
-			// eraserPoints = new ArrayList<Point>();
-
-			// repaint();
-		}
 	}
 
 	public static void main(String[] args)
@@ -175,8 +193,9 @@ public class Drawing extends JPanel
 				buttons.add(redRadioButton);
 				buttons.add(eraserRadioButton);
 				buttons.add(clearButton);
+				buttons.add(size10);
+				buttons.add(size20);
 				frame.add(buttons, BorderLayout.SOUTH);
-				clearButton.addActionListener(new ClearButtonListener());
 				ButtonGroup group = new ButtonGroup();
 				group.add(greenRadioButton);
 				group.add(blueRadioButton);
