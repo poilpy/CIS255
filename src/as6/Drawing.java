@@ -162,6 +162,7 @@ public class Drawing extends JPanel
 			redPoints = new ArrayList<Point>();
 			eraserPoints = new ArrayList<Point>();
 			
+//			repaint();
 		}
 	}
 
@@ -182,11 +183,13 @@ public class Drawing extends JPanel
 				redRadioButton = new JRadioButton("Red");
 				eraserRadioButton = new JRadioButton("Eraser");
 				clearButton = new JButton("Clear");
-				frame.add(greenRadioButton, BorderLayout.SOUTH);
-				frame.add(blueRadioButton, BorderLayout.SOUTH);
-				frame.add(redRadioButton, BorderLayout.SOUTH);
-				frame.add(eraserRadioButton, BorderLayout.SOUTH);
-				frame.add(clearButton, BorderLayout.SOUTH);
+				JPanel buttons = new JPanel();
+                buttons.add(greenRadioButton);
+                buttons.add(blueRadioButton);
+                buttons.add(redRadioButton);
+                buttons.add(eraserRadioButton);
+                buttons.add(clearButton);
+                frame.add(buttons, BorderLayout.SOUTH);
 				greenRadioButton.addActionListener(new RadioButtonListener());
 				blueRadioButton.addActionListener(new RadioButtonListener());
 				redRadioButton.addActionListener(new RadioButtonListener());
