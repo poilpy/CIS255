@@ -30,7 +30,8 @@ public class Question2 extends JPanel
 		{
 			d2.setColor(Color.GREEN);
 			d2.fill(rect);
-		} else
+		} 
+		else
 		{
 			d2.draw(rect);
 		}

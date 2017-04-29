@@ -44,5 +44,7 @@ public class Question1 extends JPanel
 		d.drawString("Sample text", 300, 300);
 
 	}
+	
+	
 
 }

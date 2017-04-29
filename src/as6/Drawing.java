@@ -11,20 +11,28 @@ public class Drawing extends JPanel
 	public static final int WIDTH = 500;
 	public static final int LENGTH = 600;
 
-	private ArrayList<Point> pointList;
+	private static ArrayList<Point> bluePoints;
+	private static ArrayList<Point> redPoints;
+	private static ArrayList<Point> eraserPoints;
+	private static ArrayList<Point> greenPoints;
 
 	private boolean paintOn;
+
 	private static JRadioButton greenRadioButton;
 	private static JRadioButton blueRadioButton;
 	private static JRadioButton redRadioButton;
 	private static JRadioButton eraserRadioButton;
 	private static JButton clearButton;
 	private static Color radioButtonCase;
+
 	public Drawing()
 	{
 		setBackground(Color.WHITE);
 
-		pointList = new ArrayList<Point>();
+		greenPoints = new ArrayList<Point>();
+		bluePoints = new ArrayList<Point>();
+		redPoints = new ArrayList<Point>();
+		eraserPoints = new ArrayList<Point>();
 		this.paintOn = false;
 		this.addMouseListener(new MouseAdapter()
 		{
@@ -45,8 +53,27 @@ public class Drawing extends JPanel
 			{
 				if (isPaintOn())
 				{
-					Point point = e.getPoint();
-					pointList.add(point);
+					if(blueRadioButton.isSelected())
+					{
+						Point point = e.getPoint();
+						bluePoints.add(point);
+					}
+					else if(redRadioButton.isSelected())
+					{
+						Point point = e.getPoint();
+						redPoints.add(point);
+					}
+					else if(greenRadioButton.isSelected())
+					{
+						Point point = e.getPoint();
+						greenPoints.add(point);
+					}
+					else if(eraserRadioButton.isSelected())
+					{
+
+						Point point = e.getPoint();
+						eraserPoints.add(point);
+					}
 
 					repaint();
 				}
@@ -70,12 +97,36 @@ public class Drawing extends JPanel
 	{
 		super.paintComponent(d);
 
-		for (Point point : pointList)
+		for (Point point : bluePoints)
 		{
 			int x = (int) point.getX();
 			int y = (int) point.getY();
 			d.fillOval(x, y, 10, 10);
-			d.setColor(radioButtonCase);
+			d.setColor(Color.BLUE);
+		}
+		
+		for (Point point : redPoints)
+		{
+			int x = (int) point.getX();
+			int y = (int) point.getY();
+			d.fillOval(x, y, 10, 10);
+			d.setColor(Color.RED);
+		}
+		
+		for (Point point : greenPoints)
+		{
+			int x = (int) point.getX();
+			int y = (int) point.getY();
+			d.fillOval(x, y, 10, 10);
+			d.setColor(Color.GREEN);
+		}
+		
+		for (Point point : eraserPoints)
+		{
+			int x = (int) point.getX();
+			int y = (int) point.getY();
+			d.fillOval(x, y, 10, 10);
+			d.setColor(Color.WHITE);
 		}
 	}
 
@@ -106,7 +157,11 @@ public class Drawing extends JPanel
 	{
 		public void actionPerformed(ActionEvent event)
 		{
-			pointList.clear();
+			greenPoints = new ArrayList<Point>();
+			bluePoints = new ArrayList<Point>();
+			redPoints = new ArrayList<Point>();
+			eraserPoints = new ArrayList<Point>();
+			
 		}
 	}
 
@@ -117,10 +172,31 @@ public class Drawing extends JPanel
 			public void run()
 			{
 				JFrame frame = new JFrame("Drawing");
+				frame.setLayout(new GridLayout());
 				frame.setSize(WIDTH, LENGTH);
 				Drawing panel = new Drawing();
 				frame.getContentPane().add(panel);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				greenRadioButton = new JRadioButton("Green");
+				blueRadioButton = new JRadioButton("Blue");
+				redRadioButton = new JRadioButton("Red");
+				eraserRadioButton = new JRadioButton("Eraser");
+				clearButton = new JButton("Clear");
+				frame.add(greenRadioButton, BorderLayout.SOUTH);
+				frame.add(blueRadioButton, BorderLayout.SOUTH);
+				frame.add(redRadioButton, BorderLayout.SOUTH);
+				frame.add(eraserRadioButton, BorderLayout.SOUTH);
+				frame.add(clearButton, BorderLayout.SOUTH);
+				greenRadioButton.addActionListener(new RadioButtonListener());
+				blueRadioButton.addActionListener(new RadioButtonListener());
+				redRadioButton.addActionListener(new RadioButtonListener());
+				eraserRadioButton.addActionListener(new RadioButtonListener());
+				clearButton.addActionListener(new ClearButtonListener());
+				ButtonGroup group = new ButtonGroup();
+				group.add(greenRadioButton);
+				group.add(blueRadioButton);
+				group.add(redRadioButton);
+				group.add(eraserRadioButton);
 				frame.setVisible(true);
 			}
 		});
